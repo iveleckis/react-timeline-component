@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+const { default: Timeline } = require("./Timeline");
+
+const data = [
+  {
+    id: "1",
+    start_date: "2020-01-27",
+    end_date: "2020-11-27",
+    title: "Task 1",
+    group: 1,
+  },
+  {
+    id: "2",
+    start_date: "2020-08-27",
+    end_date: "2020-10-03",
+    title: "Task 2",
+    group: 2,
+  },
+  {
+    id: "3",
+    start_date: "2020-06-05",
+    end_date: "2020-06-25",
+    title: "Task 3",
+    group: 2,
+  },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="h-full flex justify-center items-center">
+      <Timeline data={data} />
     </div>
   );
 }
