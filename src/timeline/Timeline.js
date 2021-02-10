@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Line from "./Line";
+import TimelineRow from "./TimelineRow";
+import { short_months } from "./supplementary-data";
 
 const Timeline = ({ data }) => {
   const [matrix, setMatrix] = useState([]);
-  const [splitInto, setSplitInto] = useState(12);
+  const [splitIntoCels, setSplitIntoCels] = useState([]);
+  const [splitInto, setSplitInto] = useState("short_months");
 
   const create_global_group = (raw_data) => {
     const all_groups = find_different_groups(raw_data);
@@ -35,30 +37,39 @@ const Timeline = ({ data }) => {
     return new_group;
   };
 
+  const setup_timeline_header = (header_cel_values) => {
+    header_cel_values === "short_months" && setSplitIntoCels(short_months);
+  };
+
   useEffect(() => {
     const global_group = create_global_group(data);
     setMatrix(global_group);
+    setup_timeline_header(splitInto);
     // eslint-disable-next-line
   }, [data]);
 
   return (
-    <div className="w-full">
-      <select
-        onChange={(e) => {
-          setSplitInto(Number(e.target.value));
-        }}
-      >
-        <option value="12">12 Y</option>
-        <option value="30">30 M</option>
-        <option value="7">7 W</option>
-      </select>
-      <div className="flex justify-center p-2">Splitted into : {splitInto}</div>
+    <div className="border border-gray-400 shadow-md">
+      <div className="flex border-b border-gray-400 shadow-m">
+        <div className="w-32 flex items-center justify-center bg-white shadow-r uppercase font-bold text-gray-600">
+          2021
+        </div>
+        <div className="flex w-full">
+          {splitIntoCels.map((splitUnit) => (
+            <div
+              className="w-full flex justify-center p-2 text-gray-600"
+              key={Math.random()}
+            >
+              {splitUnit}
+            </div>
+          ))}
+        </div>
+      </div>
       {matrix.map((item) => (
-        <Line
+        <TimelineRow
           key={Math.random()}
-          data={item}
+          line_data={item}
           title={item[0].group}
-          splitInto={splitInto}
         />
       ))}
     </div>
