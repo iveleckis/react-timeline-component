@@ -6,7 +6,7 @@ function App() {
     return (
         <div className='h-full flex justify-center items-center'>
             <div className='p-32 w-full'>
-                <Timeline data={data_for_testing} />
+                <Timeline timeline_data={data_for_testing} />
             </div>
         </div>
     );

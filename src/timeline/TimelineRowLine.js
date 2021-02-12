@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TimelineTrackMesurement from './TimelineTrackMesurement';
 
 const random_line_color_pool = [
     `bg-red-${Math.floor(Math.random() * 4 + 1) * 100} border-red-700`,
@@ -12,19 +13,12 @@ const random_line_color_pool = [
 ];
 
 const TimelineRowLine = ({ measurement_unit, fill_length, item_name }) => {
-    const [splitByMeasurement, setSplitByMeasurement] = useState(
-        new Array(measurement_unit).fill(0)
-    );
-
     return (
         <div className='w-full'>
             <div className='flex relative h-8 items-center'>
-                {splitByMeasurement.map((unit) => (
-                    <div
-                        key={Math.random()}
-                        className='w-full h-8 border-l'
-                    ></div>
-                ))}
+                <TimelineTrackMesurement
+                    how_many_times_to_split={measurement_unit}
+                />
                 <div
                     style={{
                         width: `${
