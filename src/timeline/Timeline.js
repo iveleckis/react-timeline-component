@@ -7,6 +7,8 @@ const Timeline = ({ timeline_data }) => {
     const [timelineBodyRange, setTimelineBodyRange] = useState(2021);
     const [howManyTracks, setHowManyTracks] = useState(12);
 
+    const [currentDate, setCurrentDate] = useState(new Date().getFullYear());
+
     const create_global_group = (raw_data) => {
         const all_groups = find_different_groups(raw_data);
         const global_group = [];
@@ -51,6 +53,7 @@ const Timeline = ({ timeline_data }) => {
                 set_how_many_tarcks={(track_count) =>
                     setHowManyTracks(track_count)
                 }
+                current_date={currentDate}
             />
             <TimelineBody
                 data_matrix={matrix}

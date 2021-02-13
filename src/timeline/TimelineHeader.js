@@ -82,7 +82,7 @@ const TimelineHeader = ({
                     month.numerical_expression ===
                     table_range.split('').splice(5, 2).join('')
             ).days;
-        set_how_many_tarcks(how_many_days);
+        set_how_many_tarcks(how_many_days ? how_many_days : 12);
         // eslint-disable-next-line
     }, [splitInto, table_range]);
 

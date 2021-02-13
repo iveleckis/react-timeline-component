@@ -1,4 +1,4 @@
-export const short_months = [
+export const months = [
     { short_name_letters: 'Jan.', numerical_expression: '01', days: 31 },
     { short_name_letters: 'Feb.', numerical_expression: '02', days: 28 },
     { short_name_letters: 'Mar.', numerical_expression: '03', days: 31 },

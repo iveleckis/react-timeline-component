@@ -5,13 +5,14 @@ import ItemTrack from './ItemTrack';
 // data: group data to create time stamps
 // splitInto: depends on date split selected in parent component = Q (4), D (~30), W (7)
 
-const Row = ({ title, line_data, track_splits_into }) => {
+const Row = ({ title, line_data, track_splits_into, global_date }) => {
     const [lineRowData, setLineRowData] = useState(line_data);
 
     const add_values_to_line = (row_data) => {
+        const filtered_by_date_data = filter_data_by_date_to_display(row_data);
         const row_line_with_indexes = [];
-        for (let i in row_data) {
-            const date_indexes = get_date_indexes(row_data[i]);
+        for (let i in filtered_by_date_data) {
+            const date_indexes = get_date_indexes(filtered_by_date_data[i]);
             if (date_indexes) {
                 date_indexes.start = calculate_ratios(date_indexes.start, 365);
                 date_indexes.end = calculate_ratios(date_indexes.end, 365);
@@ -34,6 +35,40 @@ const Row = ({ title, line_data, track_splits_into }) => {
             }
         }
         setLineRowData(row_line_with_indexes);
+    };
+
+    const filter_data_by_date_to_display = (raw_data) => {
+        const filtered = raw_data.filter((item) => {
+            const item_start_date = Number(
+                item.start_date.split('').splice(0, 4).join('')
+            );
+            const item_end_date = Number(
+                item.end_date.split('').splice(0, 4).join('')
+            );
+            if (
+                !(
+                    (item_start_date > global_date &&
+                        item_end_date > global_date) ||
+                    (item_start_date < global_date &&
+                        item_end_date < global_date)
+                )
+            ) {
+                if (
+                    item_start_date < global_date &&
+                    item_end_date > global_date
+                ) {
+                    return item;
+                } else if (
+                    item_start_date === global_date ||
+                    item_end_date === global_date
+                ) {
+                    return item;
+                }
+            } else {
+                return null;
+            }
+        });
+        return filtered;
     };
 
     const get_date_indexes = (item) => {
