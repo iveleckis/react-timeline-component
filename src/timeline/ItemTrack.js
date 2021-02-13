@@ -1,24 +1,12 @@
-import React, { useState } from 'react';
-import TimelineTrackMesurement from './TimelineTrackMesurement';
+import React from 'react';
+import TrackUnit from './TrackUnit';
+import { random_line_color_pool } from './supplementary-data';
 
-const random_line_color_pool = [
-    `bg-red-${Math.floor(Math.random() * 4 + 1) * 100} border-red-700`,
-    `bg-blue-${Math.floor(Math.random() * 4 + 1) * 100} border-blue-700`,
-    `bg-green-${Math.floor(Math.random() * 4 + 1) * 100} border-green-700`,
-    `bg-yellow-${Math.floor(Math.random() * 4 + 1) * 100} border-yellow-700`,
-    `bg-pink-${Math.floor(Math.random() * 4 + 1) * 100} border-pink-700`,
-    `bg-gray-${Math.floor(Math.random() * 4 + 1) * 100} border-gray-700`,
-    `bg-indigo-${Math.floor(Math.random() * 4 + 1) * 100} border-indigo-700`,
-    `bg-purple-${Math.floor(Math.random() * 4 + 1) * 100} border-purple-700`,
-];
-
-const TimelineRowLine = ({ measurement_unit, fill_length, item_name }) => {
+const ItemTrack = ({ measurement_unit, fill_length, item_name }) => {
     return (
         <div className='w-full'>
             <div className='flex relative h-8 items-center'>
-                <TimelineTrackMesurement
-                    how_many_times_to_split={measurement_unit}
-                />
+                <TrackUnit how_many_times_to_split={measurement_unit} />
                 <div
                     style={{
                         width: `${
@@ -44,4 +32,4 @@ const TimelineRowLine = ({ measurement_unit, fill_length, item_name }) => {
     );
 };
 
-export default TimelineRowLine;
+export default ItemTrack;

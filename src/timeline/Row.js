@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import TimelineRowLine from './TimelineRowLine';
+import ItemTrack from './ItemTrack';
 
 // title: group name
 // data: group data to create time stamps
 // splitInto: depends on date split selected in parent component = Q (4), D (~30), W (7)
 
-const TimelineRow = ({ title, line_data }) => {
+const Row = ({ title, line_data, track_splits_into }) => {
     const [lineRowData, setLineRowData] = useState(line_data);
 
     const add_values_to_line = (row_data) => {
@@ -112,8 +112,8 @@ const TimelineRow = ({ title, line_data }) => {
             <div className='w-full'>
                 {lineRowData.map((row) => (
                     <div key={Math.random()} className='flex'>
-                        <TimelineRowLine
-                            measurement_unit={12}
+                        <ItemTrack
+                            measurement_unit={track_splits_into}
                             fill_length={row.date_indexes}
                             item_name={row.title}
                         />
@@ -124,4 +124,4 @@ const TimelineRow = ({ title, line_data }) => {
     );
 };
 
-export default TimelineRow;
+export default Row;

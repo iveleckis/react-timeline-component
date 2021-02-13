@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TimelineTrackMesurement = ({ how_many_times_to_split = 0 }) => {
+const TrackUnit = ({ how_many_times_to_split = 0 }) => {
     const DrawSplits = () => {
         const splits = [];
         for (let i = 0; i < how_many_times_to_split; i++) {
@@ -12,4 +12,4 @@ const TimelineTrackMesurement = ({ how_many_times_to_split = 0 }) => {
     return <DrawSplits />;
 };
 
-export default TimelineTrackMesurement;
+export default TrackUnit;

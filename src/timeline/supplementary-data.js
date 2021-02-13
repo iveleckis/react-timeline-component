@@ -1,16 +1,27 @@
 export const short_months = [
-    { short_name_letters: 'Jan.', numerical_expression: '01' },
-    { short_name_letters: 'Feb.', numerical_expression: '02' },
-    { short_name_letters: 'Mar.', numerical_expression: '03' },
-    { short_name_letters: 'Apr.', numerical_expression: '04' },
-    { short_name_letters: 'May', numerical_expression: '05' },
-    { short_name_letters: 'Jun.', numerical_expression: '06' },
-    { short_name_letters: 'Jul.', numerical_expression: '07' },
-    { short_name_letters: 'Aug.', numerical_expression: '08' },
-    { short_name_letters: 'Sep.', numerical_expression: '09' },
-    { short_name_letters: 'Oct.', numerical_expression: '10' },
-    { short_name_letters: 'Nov.', numerical_expression: '11' },
-    { short_name_letters: 'Dec.', numerical_expression: '12' },
+    { short_name_letters: 'Jan.', numerical_expression: '01', days: 31 },
+    { short_name_letters: 'Feb.', numerical_expression: '02', days: 28 },
+    { short_name_letters: 'Mar.', numerical_expression: '03', days: 31 },
+    { short_name_letters: 'Apr.', numerical_expression: '04', days: 30 },
+    { short_name_letters: 'May', numerical_expression: '05', days: 31 },
+    { short_name_letters: 'Jun.', numerical_expression: '06', days: 30 },
+    { short_name_letters: 'Jul.', numerical_expression: '07', days: 31 },
+    { short_name_letters: 'Aug.', numerical_expression: '08', days: 31 },
+    { short_name_letters: 'Sep.', numerical_expression: '09', days: 30 },
+    { short_name_letters: 'Oct.', numerical_expression: '10', days: 31 },
+    { short_name_letters: 'Nov.', numerical_expression: '11', days: 30 },
+    { short_name_letters: 'Dec.', numerical_expression: '12', days: 31 },
+];
+
+export const random_line_color_pool = [
+    `bg-red-${Math.floor(Math.random() * 4 + 1) * 100} border-red-700`,
+    `bg-blue-${Math.floor(Math.random() * 4 + 1) * 100} border-blue-700`,
+    `bg-green-${Math.floor(Math.random() * 4 + 1) * 100} border-green-700`,
+    `bg-yellow-${Math.floor(Math.random() * 4 + 1) * 100} border-yellow-700`,
+    `bg-pink-${Math.floor(Math.random() * 4 + 1) * 100} border-pink-700`,
+    `bg-gray-${Math.floor(Math.random() * 4 + 1) * 100} border-gray-700`,
+    `bg-indigo-${Math.floor(Math.random() * 4 + 1) * 100} border-indigo-700`,
+    `bg-purple-${Math.floor(Math.random() * 4 + 1) * 100} border-purple-700`,
 ];
 
 export const data_for_testing = [

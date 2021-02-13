@@ -5,6 +5,7 @@ import TimelineBody from './TimelineBody';
 const Timeline = ({ timeline_data }) => {
     const [matrix, setMatrix] = useState([]);
     const [timelineBodyRange, setTimelineBodyRange] = useState(2021);
+    const [howManyTracks, setHowManyTracks] = useState(12);
 
     const create_global_group = (raw_data) => {
         const all_groups = find_different_groups(raw_data);
@@ -46,11 +47,15 @@ const Timeline = ({ timeline_data }) => {
         <div className='border border-gray-400 shadow-md'>
             <TimelineHeader
                 table_range={timelineBodyRange}
-                set_range={(range) => setTimelineBodyRange(range)}
+                set_range_date={(range) => setTimelineBodyRange(range)}
+                set_how_many_tarcks={(track_count) =>
+                    setHowManyTracks(track_count)
+                }
             />
             <TimelineBody
                 data_matrix={matrix}
                 table_range={timelineBodyRange}
+                track_splits_into={howManyTracks}
             />
         </div>
     );
