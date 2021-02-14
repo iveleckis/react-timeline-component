@@ -16,7 +16,7 @@ const Header = ({
             for (let i = 1; i <= current_month_details.days; i++) {
                 days.push(
                     <div
-                        className='w-full text-xs p-1 flex justify-center items-center border-b'
+                        className='w-full text-xs p-1 flex justify-center items-center'
                         key={i}
                     >
                         {i}
@@ -28,10 +28,10 @@ const Header = ({
     };
 
     return (
-        <div className='flex select-none w-full'>
-            <div className='flex w-full'>
+        <div className='flex select-none w-full shadow-md z-50'>
+            <div className='flex w-full border-b border-gray-400'>
                 <div
-                    className='transition duration-100 flex justify-center items-center font-bold cursor-pointer select-none w-32 border hover:bg-gray-100'
+                    className='transition duration-100 border-gray-200 flex justify-center items-center font-bold cursor-pointer select-none w-32 hover:bg-gray-100'
                     onClick={() =>
                         global_year === 2020
                             ? new_global_year(2021)
@@ -47,20 +47,39 @@ const Header = ({
                         {months.map((month) => (
                             <div
                                 key={month.numerical_expression}
-                                className={`w-full transition duration-100 flex justify-center items-center cursor-pointer p-2 border-t hover:bg-gray-100 ${
-                                    global_month === month.numerical_expression
-                                        ? 'hover:bg-none border-l border-r font-bold'
-                                        : ' border-b'
+                                className={`w-full transition duration-100 flex justify-center items-center cursor-pointer p-2 border-gray-400 hover:bg-gray-100 ${
+                                    global_month ===
+                                        month.numerical_expression &&
+                                    'hover:bg-none border-l font-bold'
+                                } ${
+                                    month.numerical_expression !== '12' &&
+                                    global_month ===
+                                        month.numerical_expression &&
+                                    'border-r'
+                                } ${
+                                    global_month &&
+                                    global_month !==
+                                        month.numerical_expression &&
+                                    'border-b'
                                 }`}
-                                onClick={() =>
-                                    new_global_month(month.numerical_expression)
-                                }
+                                onClick={() => {
+                                    if (
+                                        global_month ===
+                                        month.numerical_expression
+                                    ) {
+                                        new_global_month(null);
+                                    } else {
+                                        new_global_month(
+                                            month.numerical_expression
+                                        );
+                                    }
+                                }}
                             >
                                 {month.short_name_letters}
                             </div>
                         ))}
                     </div>
-                    <div className='flex border-r'>
+                    <div className='flex border-l border-gray-400'>
                         {global_month && <MonthDays />}
                     </div>
                 </div>

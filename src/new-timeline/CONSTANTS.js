@@ -13,15 +13,38 @@ export const months = [
     { short_name_letters: 'Dec.', numerical_expression: '12', days: 31 },
 ];
 
-export const random_line_color_pool = [
-    `bg-red-${Math.floor(Math.random() * 4 + 1) * 100} border-red-700`,
-    `bg-blue-${Math.floor(Math.random() * 4 + 1) * 100} border-blue-700`,
-    `bg-green-${Math.floor(Math.random() * 4 + 1) * 100} border-green-700`,
-    `bg-yellow-${Math.floor(Math.random() * 4 + 1) * 100} border-yellow-700`,
-    `bg-pink-${Math.floor(Math.random() * 4 + 1) * 100} border-pink-700`,
-    `bg-gray-${Math.floor(Math.random() * 4 + 1) * 100} border-gray-700`,
-    `bg-indigo-${Math.floor(Math.random() * 4 + 1) * 100} border-indigo-700`,
-    `bg-purple-${Math.floor(Math.random() * 4 + 1) * 100} border-purple-700`,
+export const track_color_pool = [
+    `bg-red-100 border-red-700`,
+    `bg-red-200 border-red-700`,
+    `bg-red-300 border-red-700`,
+    `bg-blue-100 border-blue-700`,
+    `bg-blue-200 border-blue-700`,
+    `bg-blue-300 border-blue-700`,
+    `bg-blue-400 border-blue-700`,
+    `bg-green-100 border-green-700`,
+    `bg-green-200 border-green-700`,
+    `bg-green-300 border-green-700`,
+    `bg-green-400 border-green-700`,
+    `bg-yellow-100 border-yellow-700`,
+    `bg-yellow-200 border-yellow-700`,
+    `bg-yellow-300 border-yellow-700`,
+    `bg-yellow-400 border-yellow-700`,
+    `bg-pink-100 border-pink-700`,
+    `bg-pink-200 border-pink-700`,
+    `bg-pink-300 border-pink-700`,
+    `bg-pink-400 border-pink-700`,
+    `bg-gray-100 border-gray-700`,
+    `bg-gray-200 border-gray-700`,
+    `bg-gray-300 border-gray-700`,
+    `bg-gray-400 border-gray-700`,
+    `bg-indigo-100 border-indigo-700`,
+    `bg-indigo-200 border-indigo-700`,
+    `bg-indigo-300 border-indigo-700`,
+    `bg-indigo-400 border-indigo-700`,
+    `bg-purple-100 border-purple-700`,
+    `bg-purple-200 border-purple-700`,
+    `bg-purple-300 border-purple-700`,
+    `bg-purple-400 border-purple-700`,
 ];
 
 export const data_for_testing = [
@@ -62,7 +85,7 @@ export const data_for_testing = [
     },
     {
         id: '2',
-        start_date: '2021.6.27',
+        start_date: '2021.06.27',
         end_date: '2021.10.03',
         title: 'VPN Support/Money-back section',
         group: 'Ideas',
@@ -91,8 +114,15 @@ export const data_for_testing = [
     {
         id: '6',
         start_date: '2021.02.05',
-        end_date: '2021.012.25',
+        end_date: '2021.12.25',
         title: 'Orange',
+        group: 'Random',
+    },
+    {
+        id: '6',
+        start_date: '2021.01.05',
+        end_date: '2021.01.25',
+        title: 'Apple',
         group: 'Random',
     },
     {

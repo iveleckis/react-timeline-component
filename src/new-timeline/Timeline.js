@@ -40,7 +40,6 @@ const TimelineN = ({ timeline_data }) => {
 
     useEffect(() => {
         const group_of_groups = create_group_of_groups(timeline_data);
-        console.log(group_of_groups);
         setGroupOfGroups(group_of_groups);
         // eslint-disable-next-line
     }, [timeline_data]);

@@ -38,7 +38,7 @@ const Row = ({ title, line_data, track_splits_into, global_date }) => {
     };
 
     const filter_data_by_date_to_display = (raw_data) => {
-        const filtered = raw_data.filter((item) => {
+        /* const filtered = raw_data.filter((item) => {
             const item_start_date = Number(
                 item.start_date.split('').splice(0, 4).join('')
             );
@@ -67,8 +67,8 @@ const Row = ({ title, line_data, track_splits_into, global_date }) => {
             } else {
                 return null;
             }
-        });
-        return filtered;
+        }); */
+        //return filtered;
     };
 
     const get_date_indexes = (item) => {
