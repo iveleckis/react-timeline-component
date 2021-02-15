@@ -6,6 +6,8 @@ const TimelineN = ({ timeline_data }) => {
     const [globalYear, setGlobalYear] = useState(new Date().getFullYear());
     const [globalMonth, setGlobalMonth] = useState(null);
 
+    const [possibleYears, setPossibleYears] = useState([]);
+
     const [groupOfGroups, setGroupOfGroups] = useState([]);
 
     const create_group_of_groups = (raw_data) => {
@@ -38,7 +40,29 @@ const TimelineN = ({ timeline_data }) => {
         return new_group;
     };
 
+    const setup_possible_years = (data_to_pick_from) => {
+        const years = [];
+        for (let i in data_to_pick_from) {
+            const start = Number(
+                data_to_pick_from[i].start_date.split('').splice(0, 4).join('')
+            );
+            const end = Number(
+                data_to_pick_from[i].end_date.split('').splice(0, 4).join('')
+            );
+            if (!years.includes(start)) {
+                years.push(start);
+            }
+            if (!years.includes(end)) {
+                years.push(end);
+            }
+        }
+        years.sort((a, b) => (a < b ? 1 : -1));
+        return years;
+    };
+
     useEffect(() => {
+        const years = setup_possible_years(timeline_data);
+        setPossibleYears(years);
         const group_of_groups = create_group_of_groups(timeline_data);
         setGroupOfGroups(group_of_groups);
         // eslint-disable-next-line
@@ -55,6 +79,7 @@ const TimelineN = ({ timeline_data }) => {
                 new_global_month={(new_global_month) =>
                     setGlobalMonth(new_global_month)
                 }
+                possible_years={possibleYears}
             />
             <Body
                 all_groups={groupOfGroups}

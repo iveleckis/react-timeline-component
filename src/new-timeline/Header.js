@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { months } from './CONSTANTS';
 
 const Header = ({
@@ -6,7 +6,9 @@ const Header = ({
     new_global_year,
     global_month,
     new_global_month,
+    possible_years,
 }) => {
+    const [showYearOptions, setShowYearOptions] = useState(false);
     const MonthDays = () => {
         if (global_month) {
             const days = [];
@@ -29,18 +31,29 @@ const Header = ({
 
     return (
         <div className='flex select-none w-full shadow-md z-50'>
-            <div className='flex w-full border-b border-gray-400'>
+            <div className='relative flex w-full border-b border-gray-400'>
                 <div
-                    className='transition duration-100 border-gray-200 flex justify-center items-center font-bold cursor-pointer select-none w-32 hover:bg-gray-100'
-                    onClick={() =>
-                        global_year === 2020
-                            ? new_global_year(2021)
-                            : global_year === 2022
-                            ? new_global_year(2020)
-                            : new_global_year(2022)
-                    }
+                    onClick={() => setShowYearOptions(!showYearOptions)}
+                    className='transition duration-100 border-gray-200 flex justify-center items-center font-bold cursor-pointer select-none w-48 hover:bg-gray-100'
                 >
                     {global_year}
+                    {showYearOptions && (
+                        <div className='absolute divide-y left-0 top-10 z-50 bg-white border shadow w-40'>
+                            {possible_years.map((year) => (
+                                <div
+                                    key={year}
+                                    onClick={() => {
+                                        setShowYearOptions(false);
+                                        new_global_year(year);
+                                    }}
+                                    className='flex justify-center items-center p-2 hover:bg-gray-50 cursor-pointer w-full'
+                                >
+                                    {year}
+                                </div>
+                            ))}
+                            <div className='w-full'></div>
+                        </div>
+                    )}
                 </div>
                 <div className='w-full'>
                     <div className='flex border-r w-full'>
