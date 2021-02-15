@@ -62,8 +62,6 @@ const Group = ({
         item_range_indexes.start = start_index;
       }
     } else {
-      console.log(item);
-
       const current_year_month = `${year}.${month}`;
 
       const item_start_year_month = item.start_date
@@ -114,9 +112,6 @@ const Group = ({
   ) => {
     const current_year_date = new Date(current_date_range);
     const date_to_be_indexed_date = new Date(date_to_be_indexed);
-
-    console.log(current_year_date);
-    console.log(date_to_be_indexed_date);
 
     const how_many_days_passed = Math.ceil(
       (date_to_be_indexed_date - current_year_date) / 86400000
