@@ -69,7 +69,7 @@ const TimelineN = ({ timeline_data }) => {
     }, [timeline_data]);
 
     return (
-        <div className='text-gray-700 border-gray-400 border'>
+        <div className='text-gray-700 border-gray-400 border  overflow-x-auto'>
             <Header
                 global_year={globalYear}
                 global_month={globalMonth}

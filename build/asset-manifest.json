@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-timeline-component/static/css/main.970f5559.chunk.css",
+    "main.js": "/react-timeline-component/static/js/main.0df17da5.chunk.js",
+    "main.js.map": "/react-timeline-component/static/js/main.0df17da5.chunk.js.map",
+    "runtime-main.js": "/react-timeline-component/static/js/runtime-main.b1cb2e75.js",
+    "runtime-main.js.map": "/react-timeline-component/static/js/runtime-main.b1cb2e75.js.map",
+    "static/js/2.524c8edf.chunk.js": "/react-timeline-component/static/js/2.524c8edf.chunk.js",
+    "static/js/2.524c8edf.chunk.js.map": "/react-timeline-component/static/js/2.524c8edf.chunk.js.map",
+    "static/js/3.ffc45b8e.chunk.js": "/react-timeline-component/static/js/3.ffc45b8e.chunk.js",
+    "static/js/3.ffc45b8e.chunk.js.map": "/react-timeline-component/static/js/3.ffc45b8e.chunk.js.map",
+    "index.html": "/react-timeline-component/index.html",
+    "static/css/main.970f5559.chunk.css.map": "/react-timeline-component/static/css/main.970f5559.chunk.css.map",
+    "static/js/2.524c8edf.chunk.js.LICENSE.txt": "/react-timeline-component/static/js/2.524c8edf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1cb2e75.js",
+    "static/js/2.524c8edf.chunk.js",
+    "static/css/main.970f5559.chunk.css",
+    "static/js/main.0df17da5.chunk.js"
+  ]
+}
