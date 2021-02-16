@@ -30,11 +30,11 @@ const Header = ({
     };
 
     return (
-        <div className='flex select-none w-full shadow-md z-50'>
+        <div className='flex select-none shadow-md z-50 min-w-max'>
             <div className='relative flex w-full border-b border-gray-400'>
                 <div
                     onClick={() => setShowYearOptions(!showYearOptions)}
-                    className='transition duration-100 border-gray-200 flex justify-center items-center font-bold cursor-pointer select-none w-48 hover:bg-gray-100'
+                    className='w-40 flex-shrink-0 transition duration-100 border-gray-200 flex justify-center items-center font-bold cursor-pointer select-none hover:bg-gray-100'
                 >
                     {global_year}
                     {showYearOptions && (
