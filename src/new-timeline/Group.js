@@ -146,7 +146,7 @@ const Group = ({
     return (
         <>
             {listOfGroupItemsWithIndexes && (
-                <div className='flex w-full border-b'>
+                <div className='flex w-full'>
                     <div className='flex items-center justify-center w-48 bg-white shadow-r uppercase font-bold text-gray-600'>
                         {listOfGroupItemsWithIndexes[0] &&
                             listOfGroupItemsWithIndexes[0].group}

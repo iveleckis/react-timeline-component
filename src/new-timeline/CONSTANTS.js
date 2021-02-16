@@ -59,4 +59,59 @@ export const data_for_testing = [
                 Math.floor(Math.random() * track_color_pool.length)
             ],
     },
+    {
+        start_date: '2021.01.30',
+        end_date: '2021.02.25',
+        title: 'Longer test',
+        group: 'Running tests',
+        details: 'This test will improve our performance',
+        styling:
+            track_color_pool[
+                Math.floor(Math.random() * track_color_pool.length)
+            ],
+    },
+    {
+        start_date: '2021.02.20',
+        end_date: '2021.03.05',
+        title: 'Good test',
+        group: 'Running tests',
+        details: 'This test will improve our performance',
+        styling:
+            track_color_pool[
+                Math.floor(Math.random() * track_color_pool.length)
+            ],
+    },
+    {
+        start_date: '2021.03.01',
+        end_date: '2021.03.12',
+        title: 'Another good test',
+        group: 'Running tests',
+        details: 'This test will improve our performance',
+        styling:
+            track_color_pool[
+                Math.floor(Math.random() * track_color_pool.length)
+            ],
+    },
+    {
+        start_date: '2021.01.20',
+        end_date: '2021.03.05',
+        title: 'That was a good test',
+        group: 'Finished tests',
+        details: 'This test will improve our performance',
+        styling:
+            track_color_pool[
+                Math.floor(Math.random() * track_color_pool.length)
+            ],
+    },
+    {
+        start_date: '2021.01.11',
+        end_date: '2021.02.26',
+        title: 'Hard test',
+        group: 'Finished tests',
+        details: 'This test will improve our performance',
+        styling:
+            track_color_pool[
+                Math.floor(Math.random() * track_color_pool.length)
+            ],
+    },
 ];

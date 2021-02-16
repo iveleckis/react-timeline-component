@@ -17,7 +17,7 @@ const Track = ({
     return (
         <div className='relative z-50 select-none'>
             <div
-                className={`flex justify-center items-center font-bold text-gray-800 h-8 my-2 rounded border-2 ${track_styling}`}
+                className={`flex justify-center items-center font-bold text-gray-800 my-2 rounded border-2 ${track_styling}`}
                 style={{
                     width: `${track_length_by_index}%`,
                     marginLeft: `${track_start_by_index}%`,
