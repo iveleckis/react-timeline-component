@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-// import { track_color_pool } from "./CONSTANTS";
-
-/* const random_track_styling =
-  track_color_pool[Math.floor(Math.random() * track_color_pool.length)]; */
 
 const Track = ({
   track_length_by_index,
@@ -23,7 +19,7 @@ const Track = ({
           height: "auto",
         }}
         onClick={() => setExpandTrackInfo(!expandTrackInfo)}
-        className={`flex justify-center transition-all duration-500 items-center font-bold text-gray-800 my-2 rounded border-2 ${track_styling}`}
+        className={`flex justify-center cursor-pointer overflow-x-hidden transition-all duration-500 items-center font-bold text-gray-800 my-2 rounded border-2 ${track_styling}`}
       >
         {expandTrackInfo ? (
           <div className="flex-col text-sm text-center">
