@@ -18,7 +18,7 @@ const Header = ({
       for (let i = 1; i <= current_month_details.days; i++) {
         days.push(
           <div
-            className="w-full text-xs p-1 flex justify-center items-center"
+            className="w-6 text-xs p-1 flex justify-center items-center"
             key={i}
           >
             {i}
@@ -60,7 +60,8 @@ const Header = ({
             {months.map((month) => (
               <div
                 key={month.numerical_expression}
-                className={`w-full transition duration-100 flex justify-center items-center cursor-pointer p-2 border-gray-400 hover:bg-gray-100 ${
+                style={{ width: `${(month.days * 100) / 365}%` }}
+                className={`transition duration-100 flex justify-center items-center cursor-pointer p-2 border-gray-400 hover:bg-gray-100 ${
                   global_month === month.numerical_expression &&
                   "hover:bg-none border-l font-bold"
                 } ${

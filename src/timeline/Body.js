@@ -6,6 +6,17 @@ import { months } from "./CONSTANTS";
 const Body = ({ all_groups, global_year, global_month }) => {
   const [filteredGroups, setFilteredGroups] = useState([]);
 
+  const [groupWidth, setGroupWidth] = useState(
+    global_month
+      ? `${
+          160 +
+          24 *
+            months.find((month) => month.numerical_expression === global_month)
+              .days
+        }px`
+      : `702px`
+  );
+
   const set_splitter_by_global_date = (year, month) => {
     if (!month) {
       return 12;
@@ -68,8 +79,27 @@ const Body = ({ all_groups, global_year, global_month }) => {
     // eslint-disable-next-line
   }, [all_groups, global_month, global_year]);
 
+  useEffect(() => {
+    setGroupWidth(
+      global_month
+        ? `${
+            160 +
+            24 *
+              months.find(
+                (month) => month.numerical_expression === global_month
+              ).days
+          }px`
+        : "702px"
+    );
+  }, [global_month]);
+
   return (
-    <div className="relative responsive-splitter">
+    <div
+      className="relative"
+      style={{
+        width: `${groupWidth}`,
+      }}
+    >
       {filteredGroups &&
         filteredGroups.map((group, i) => {
           return (
