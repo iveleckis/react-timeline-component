@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Body from "./Body";
 import Header from "./Header";
 
-const TimelineN = ({ timeline_data }) => {
+const Timeline = ({ timeline_data }) => {
   const [globalYear, setGlobalYear] = useState(new Date().getFullYear());
   const [globalMonth, setGlobalMonth] = useState(null);
 
@@ -88,4 +88,4 @@ const TimelineN = ({ timeline_data }) => {
   );
 };
 
-export default TimelineN;
+export default Timeline;

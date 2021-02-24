@@ -18,7 +18,7 @@ const Header = ({
       for (let i = 1; i <= current_month_details.days; i++) {
         days.push(
           <div
-            className="w-6 text-xs p-1 flex justify-center items-center"
+            className="w-full text-xs p-1 flex justify-center items-center"
             key={i}
           >
             {i}

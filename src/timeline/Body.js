@@ -3,19 +3,17 @@ import BodySplitter from "./BodySplitter";
 import Group from "./Group";
 import { months } from "./CONSTANTS";
 
+const get_window_width = () => {
+  const { innerWidth: width } = window;
+  return width;
+};
+
 const Body = ({ all_groups, global_year, global_month }) => {
   const [filteredGroups, setFilteredGroups] = useState([]);
 
-  const [groupWidth, setGroupWidth] = useState(
-    global_month
-      ? `${
-          160 +
-          24 *
-            months.find((month) => month.numerical_expression === global_month)
-              .days
-        }px`
-      : `702px`
-  );
+  const [windowWidth, setWindowWidth] = useState(get_window_width());
+
+  const [groupWidth, setGroupWidth] = useState();
 
   const set_splitter_by_global_date = (year, month) => {
     if (!month) {
@@ -74,24 +72,36 @@ const Body = ({ all_groups, global_year, global_month }) => {
     return start_to_end_includes_current;
   };
 
+  const calculate_width = (days_to_count_from) => {
+    const full_width =
+      days_to_count_from === 31 ? 769 : days_to_count_from === 30 ? 748 : 723;
+    return `calc(100% + ${full_width - windowWidth}px)`;
+  };
+
   useEffect(() => {
     prepare_group_data(all_groups, global_year, global_month);
     // eslint-disable-next-line
   }, [all_groups, global_month, global_year]);
 
   useEffect(() => {
-    setGroupWidth(
-      global_month
-        ? `${
-            160 +
-            24 *
-              months.find(
-                (month) => month.numerical_expression === global_month
-              ).days
-          }px`
-        : "702px"
-    );
-  }, [global_month]);
+    if (!global_month) {
+      setGroupWidth(windowWidth > 719 ? "100%" : "702px");
+    } else {
+      const calculated_width = calculate_width(
+        months.find((month) => month.numerical_expression === global_month).days
+      );
+      setGroupWidth(windowWidth > 719 ? "100%" : calculated_width);
+    }
+    // eslint-disable-next-line
+  }, [global_month, windowWidth]);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(get_window_width());
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
