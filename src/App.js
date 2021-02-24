@@ -4,11 +4,9 @@ import Timeline from "./timeline/Timeline";
 
 function App() {
   return (
-    <div className="h-full flex justify-center items-center flex-col">
-      <h1 className="text-3xl font-bold pb-8 text-gray-700">Timeline Demo</h1>
-      <div className="p-2 w-full max-w-4xl">
-        <Timeline timeline_data={data_for_testing} />
-      </div>
+    <div className="flex h-full w-full bg-black">
+      <div className="flex w-64 bg-gray-600 flex-shrink-0">HUGE MENU</div>
+      <Timeline timeline_data={data_for_testing} />
     </div>
   );
 }

@@ -69,7 +69,10 @@ const Timeline = ({ timeline_data }) => {
   }, [timeline_data]);
 
   return (
-    <div className="text-gray-700 border-gray-400 border overflow-x-auto overflow-y-visible">
+    <div
+      style={{ height: "fit-content" }}
+      className="text-gray-700 border-gray-400 border overflow-x-auto overflow-y-visible bg-white"
+    >
       <Header
         global_year={globalYear}
         global_month={globalMonth}
