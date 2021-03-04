@@ -1,3 +1,7 @@
+# React Timeline Component
+
+Note: responsiveness is not quite done yet.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
