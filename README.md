@@ -1,3 +1,7 @@
+# Demo
+
+https://iveleckis.github.io/react-timeline-component/
+
 # React Timeline Component
 
 Note: responsiveness is not quite done yet.
