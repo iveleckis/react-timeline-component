@@ -30,7 +30,7 @@ const Header = ({
   };
 
   return (
-    <div className="flex select-none shadow-md z-50 min-w-max">
+    <div className="flex select-none shadow-md z-50 min-w-max bg-white">
       <div className="relative flex w-full border-b border-gray-400">
         <div
           onClick={() => setShowYearOptions(!showYearOptions)}

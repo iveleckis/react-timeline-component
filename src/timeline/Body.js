@@ -105,30 +105,31 @@ const Body = ({ all_groups, global_year, global_month }) => {
 
   return (
     <div
-      className="relative"
+      className="relative divide-y divide-gray-400"
       style={{
         width: `${groupWidth}`,
       }}
     >
       {filteredGroups &&
-        filteredGroups.map((group, i) => {
-          return (
-            <div className={`${i !== 0 && "border-t border-gray-400"}`} key={i}>
-              <Group
-                list_of_group_items={group}
-                global_year={global_year}
-                global_month={global_month}
-              >
-                <BodySplitter
-                  parts_to_split_into={set_splitter_by_global_date(
-                    global_year,
-                    global_month
-                  )}
-                />
-              </Group>
-            </div>
-          );
-        })}
+        filteredGroups.map(
+          (group, i) =>
+            group.length !== 0 && (
+              <div className={``} key={i}>
+                <Group
+                  list_of_group_items={group}
+                  global_year={global_year}
+                  global_month={global_month}
+                >
+                  <BodySplitter
+                    parts_to_split_into={set_splitter_by_global_date(
+                      global_year,
+                      global_month
+                    )}
+                  />
+                </Group>
+              </div>
+            )
+        )}
     </div>
   );
 };
