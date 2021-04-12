@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const Track = ({
-  track_length_by_index,
-  track_start_by_index,
+  trackLengthByIndex,
+  trackStartByIndex,
   title,
-  track_styling,
+  trackStyling,
   details,
   date,
 }) => {
@@ -14,12 +14,12 @@ const Track = ({
     <div className="relative z-50 select-none">
       <div
         style={{
-          width: `${expandTrackInfo ? 100 : track_length_by_index}%`,
-          marginLeft: `${expandTrackInfo ? 0 : track_start_by_index}%`,
+          width: `${expandTrackInfo ? 100 : trackLengthByIndex}%`,
+          marginLeft: `${expandTrackInfo ? 0 : trackStartByIndex}%`,
           height: "auto",
         }}
         onClick={() => setExpandTrackInfo(!expandTrackInfo)}
-        className={`flex justify-center cursor-pointer overflow-x-hidden transition-all duration-500 items-center font-bold text-gray-800 my-2 rounded border-2 ${track_styling}`}
+        className={`flex justify-center cursor-pointer overflow-x-hidden transition-all duration-500 items-center font-bold text-gray-800 my-2 rounded border-2 ${trackStyling}`}
       >
         {expandTrackInfo ? (
           <div className="flex-col text-sm text-center">

@@ -3,133 +3,132 @@ import BodySplitter from "./BodySplitter";
 import Group from "./Group";
 import { months } from "./CONSTANTS";
 
-const get_window_width = () => {
+const getWindowWidth = () => {
   const { innerWidth: width } = window;
   return width;
 };
 
-const Body = ({ all_groups, global_year, global_month }) => {
+const Body = ({ allGroups, globalYear, globalMonth }) => {
   const [filteredGroups, setFilteredGroups] = useState([]);
 
-  const [windowWidth, setWindowWidth] = useState(get_window_width());
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 
   const [groupWidth, setGroupWidth] = useState();
 
-  const set_splitter_by_global_date = (year, month) => {
+  const setSplitterByGlobalDate = (year, month) => {
     if (!month) {
       return 12;
     } else {
-      const current_month_properties = months.find(
-        (month_with_props) => month_with_props.numerical_expression === month
+      const currentMonthProperties = months.find(
+        (mnth) => mnth.numerical_expression === month
       );
-      return current_month_properties.days;
+      return currentMonthProperties.days;
     }
   };
 
-  const prepare_group_data = (groups, year, month) => {
-    const filtered_groups_group = [];
+  const prepareGroupData = (groups, year, month) => {
+    const filteredGroupsGroup = [];
     for (let i in groups) {
-      const group_filtered_by_range = filter_out_items_by_date_range(
+      const groupFilteredByRange = filterOutItemsByDateRange(
         groups[i],
         year,
         month
       );
-      filtered_groups_group.push(group_filtered_by_range);
+      filteredGroupsGroup.push(groupFilteredByRange);
     }
-    setFilteredGroups(filtered_groups_group);
+    setFilteredGroups(filteredGroupsGroup);
   };
 
-  const filter_out_items_by_date_range = (all_data, year, month) => {
-    let start_to_end_includes_current;
+  const filterOutItemsByDateRange = (allData, year, month) => {
+    let startToEndIncludesCurrent;
     if (!month) {
-      start_to_end_includes_current = all_data.filter((item) => {
-        const start_year = Number(
+      startToEndIncludesCurrent = allData.filter((item) => {
+        const startYear = Number(
           item.start_date.split("").splice(0, 4).join("")
         );
-        const end_year = Number(item.end_date.split("").splice(0, 4).join(""));
+        const endYear = Number(item.end_date.split("").splice(0, 4).join(""));
         return (
-          end_year === year ||
-          start_year === year ||
-          (start_year < year && end_year > year)
+          endYear === year ||
+          startYear === year ||
+          (startYear < year && endYear > year)
         );
       });
     } else {
-      start_to_end_includes_current = all_data.filter((item) => {
-        const start_year_month = item.start_date
-          .split("")
-          .splice(0, 7)
-          .join("");
-        const end_year_month = item.end_date.split("").splice(0, 7).join("");
-        const global_year_month = `${year}.${month}`;
+      startToEndIncludesCurrent = allData.filter((item) => {
+        const startYearMonth = item.start_date.split("").splice(0, 7).join("");
+        const endYearMonth = item.end_date.split("").splice(0, 7).join("");
+        const globalYearMonth = `${year}.${month}`;
         return (
-          end_year_month === global_year_month ||
-          start_year_month === global_year_month ||
-          (start_year_month < global_year_month &&
-            end_year_month > global_year_month)
+          endYearMonth === globalYearMonth ||
+          startYearMonth === globalYearMonth ||
+          (startYearMonth < globalYearMonth && endYearMonth > globalYearMonth)
         );
       });
     }
-    return start_to_end_includes_current;
+    return startToEndIncludesCurrent;
   };
 
-  const calculate_width = (days_to_count_from) => {
-    const full_width =
-      days_to_count_from === 31 ? 769 : days_to_count_from === 30 ? 748 : 723;
-    return `calc(100% + ${full_width - windowWidth}px)`;
+  const calculateWidth = (daysToCountFrom) => {
+    const fullWidth =
+      daysToCountFrom === 31 ? 769 : daysToCountFrom === 30 ? 748 : 723;
+    return `calc(100% + ${fullWidth - windowWidth}px)`;
   };
 
   useEffect(() => {
-    prepare_group_data(all_groups, global_year, global_month);
+    prepareGroupData(allGroups, globalYear, globalMonth);
     // eslint-disable-next-line
-  }, [all_groups, global_month, global_year]);
+  }, [allGroups, globalMonth, globalYear]);
 
   useEffect(() => {
-    if (!global_month) {
+    if (!globalMonth) {
       setGroupWidth(windowWidth > 719 ? "100%" : "702px");
     } else {
-      const calculated_width = calculate_width(
-        months.find((month) => month.numerical_expression === global_month).days
+      const calculatedWidth = calculateWidth(
+        months.find((month) => month.numerical_expression === globalMonth).days
       );
-      setGroupWidth(windowWidth > 719 ? "100%" : calculated_width);
+      setGroupWidth(windowWidth > 719 ? "100%" : calculatedWidth);
     }
     // eslint-disable-next-line
-  }, [global_month, windowWidth]);
+  }, [globalMonth, windowWidth]);
 
   useEffect(() => {
     function handleResize() {
-      setWindowWidth(get_window_width());
+      setWindowWidth(getWindowWidth());
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div
-      className="relative divide-y divide-gray-400"
-      style={{
-        width: `${groupWidth}`,
-      }}
-    >
-      {filteredGroups &&
-        filteredGroups.map(
-          (group, i) =>
-            group.length !== 0 && (
-              <div className={``} key={i}>
-                <Group
-                  list_of_group_items={group}
-                  global_year={global_year}
-                  global_month={global_month}
-                >
-                  <BodySplitter
-                    parts_to_split_into={set_splitter_by_global_date(
-                      global_year,
-                      global_month
-                    )}
-                  />
-                </Group>
-              </div>
-            )
-        )}
+    <div className="relative">
+      <div
+        className="relative divide-y divide-gray-400"
+        style={{
+          width: `${groupWidth}`,
+        }}
+      >
+        {filteredGroups &&
+          filteredGroups.map(
+            (group, i) =>
+              group.length !== 0 && (
+                <div key={i}>
+                  <Group
+                    listOfGroupItems={group}
+                    globalYear={globalYear}
+                    globalMonth={globalMonth}
+                  >
+                    <BodySplitter
+                      partsToSplitInto={setSplitterByGlobalDate(
+                        globalYear,
+                        globalMonth
+                      )}
+                      globalMonth={globalMonth}
+                    />
+                  </Group>
+                </div>
+              )
+          )}
+      </div>
     </div>
   );
 };

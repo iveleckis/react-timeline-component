@@ -1,16 +1,19 @@
 import React from "react";
 import { months } from "./CONSTANTS";
 
-const BodySplitter = ({ parts_to_split_into }) => {
+const BodySplitter = ({ partsToSplitInto, globalMonth }) => {
   const Dividers = () => {
+    const weekends = setupWeekends();
     const dividers = [];
-    for (let i = 0; i < parts_to_split_into; i++) {
-      if (parts_to_split_into !== 12) {
+    for (let i = 0; i < partsToSplitInto; i++) {
+      if (partsToSplitInto !== 12) {
         dividers.push(
           <div
             key={i}
             style={{ zIndex: "-10" }}
-            className="w-full h-full border-r border-l border-gray-100"
+            className={`w-full h-full border-r border-l border-gray-100 ${
+              weekends.includes(i) ? "bg-gray-100 border-gray-200" : ""
+            }`}
           />
         );
       } else {
@@ -29,6 +32,28 @@ const BodySplitter = ({ parts_to_split_into }) => {
       }
     }
     return dividers;
+  };
+
+  const setupWeekends = () => {
+    if (!globalMonth) return [];
+
+    const currentMonth = months.find(
+      (mnth) => mnth.numerical_expression === globalMonth
+    );
+    const currentMonthsDays = currentMonth.days;
+    const allMonthWeekends = [];
+
+    for (let i = 0; i < currentMonthsDays; i++) {
+      const dateObjectOfFirstMonthsDay = new Date(
+        `${new Date().getFullYear()}.${currentMonth.numerical_expression}.${
+          i + 1
+        }`
+      );
+      if (dateObjectOfFirstMonthsDay.getDay() % 6 === 0) {
+        allMonthWeekends.push(i);
+      }
+    }
+    return allMonthWeekends;
   };
 
   return (

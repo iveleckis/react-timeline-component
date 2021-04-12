@@ -1,167 +1,159 @@
 import React, { useEffect, useState } from "react";
 import { months } from "./CONSTANTS";
+import TodaysMarker from "./TodaysMarker";
 import Track from "./Track";
 
-const Group = ({
-  list_of_group_items,
-  global_year,
-  global_month,
-  children,
-}) => {
+const Group = ({ listOfGroupItems, globalYear, globalMonth, children }) => {
   const [
     listOfGroupItemsWithIndexes,
     setListOfGroupItemsWithIndexes,
   ] = useState();
 
-  const filter_and_setup_for_rendering = (all_data, year, month) => {
-    const all_data_with_indexes = [];
-    for (let i in all_data) {
-      const item_range_indexes = determine_item_range_by_global_date(
-        all_data[i],
+  const filterAndSetupForRendering = (allData, year, month) => {
+    const allDataWithIndexes = [];
+    for (let i in allData) {
+      const itemRangeIndexes = determineItemRangeByGlobalDate(
+        allData[i],
         year,
         month
       );
-      const item_with_indexes = {
-        ...all_data[i],
-        start_index: item_range_indexes.start,
-        end_index: item_range_indexes.end,
+      const itemWithIndexes = {
+        ...allData[i],
+        start_index: itemRangeIndexes.start,
+        end_index: itemRangeIndexes.end,
       };
-      all_data_with_indexes.push(item_with_indexes);
+      allDataWithIndexes.push(itemWithIndexes);
     }
-    setListOfGroupItemsWithIndexes(all_data_with_indexes);
+    setListOfGroupItemsWithIndexes(allDataWithIndexes);
   };
 
-  const determine_item_range_by_global_date = (item, year, month) => {
-    const item_range_indexes = { start: "not_set", end: "not_set" };
-    const item_start_date = item.start_date;
-    const item_end_date = item.end_date;
+  const determineItemRangeByGlobalDate = (item, year, month) => {
+    const itemRangeIndexes = { start: "not_set", end: "not_set" };
+    const itemStartDate = item.start_date;
+    const itemEndDate = item.end_date;
+
     if (!month) {
-      const current_year = String(year);
+      const currentYear = String(year);
 
-      const item_start_year = item.start_date.split("").splice(0, 4).join("");
-      const item_end_year = item.end_date.split("").splice(0, 4).join("");
+      const itemStartYear = item.start_date.split("").splice(0, 4).join("");
+      const itemEndYear = item.end_date.split("").splice(0, 4).join("");
 
-      if (item_start_year < current_year) {
-        item_range_indexes.start = 0;
+      if (itemStartYear < currentYear) {
+        itemRangeIndexes.start = 0;
       }
-      if (item_end_year > current_year) {
-        item_range_indexes.end = 1;
+      if (itemEndYear > currentYear) {
+        itemRangeIndexes.end = 1;
       }
-      if (item_end_year === current_year) {
-        const end_index = date_index_in_current_year(
-          current_year,
-          item_end_date
-        );
-        item_range_indexes.end = end_index;
+      if (itemEndYear === currentYear) {
+        const endIndex = dateIndexInCurrentYear(currentYear, itemEndDate);
+        itemRangeIndexes.end = endIndex;
       }
-      if (item_start_year === current_year) {
-        const start_index = date_index_in_current_year(
-          current_year,
-          item_start_date
-        );
-        item_range_indexes.start = start_index;
+      if (itemStartYear === currentYear) {
+        const startIndex = dateIndexInCurrentYear(currentYear, itemStartDate);
+        itemRangeIndexes.start = startIndex;
       }
     } else {
-      const current_year_month = `${year}.${month}`;
+      const currentYearMonth = `${year}.${month}`;
 
-      const item_start_year_month = item.start_date
+      const itemStartYearMonth = item.start_date
         .split("")
         .splice(0, 7)
         .join("");
-      const item_end_year_month = item.end_date.split("").splice(0, 7).join("");
 
-      if (item_start_year_month < current_year_month) {
-        item_range_indexes.start = 0;
+      const itemEndYearMonth = item.end_date.split("").splice(0, 7).join("");
+
+      if (itemStartYearMonth < currentYearMonth) {
+        itemRangeIndexes.start = 0;
       }
-      if (item_end_year_month > current_year_month) {
-        item_range_indexes.end = 1;
+      if (itemEndYearMonth > currentYearMonth) {
+        itemRangeIndexes.end = 1;
       }
-      if (item_end_year_month === current_year_month) {
-        const end_index = date_index_in_current_year_month(
-          current_year_month,
-          item_end_date
+      if (itemEndYearMonth === currentYearMonth) {
+        const endIndex = Number(
+          dateIndexInCurrentYearMonth(currentYearMonth, itemEndDate)
         );
-        item_range_indexes.end = end_index;
+
+        if (globalMonth) {
+          const correction = Number(
+            (
+              1 /
+              months.find((mth) => mth.numerical_expression === globalMonth)
+                .days
+            ).toFixed(2)
+          );
+          itemRangeIndexes.end = (endIndex + correction).toFixed(2);
+        } else {
+          itemRangeIndexes.end = endIndex;
+        }
       }
-      if (item_start_year_month === current_year_month) {
-        const start_index = date_index_in_current_year_month(
-          current_year_month,
-          item_start_date
+      if (itemStartYearMonth === currentYearMonth) {
+        const startIndex = dateIndexInCurrentYearMonth(
+          currentYearMonth,
+          itemStartDate
         );
-        item_range_indexes.start = start_index;
+        itemRangeIndexes.start = startIndex;
       }
     }
-    return item_range_indexes;
+    return itemRangeIndexes;
   };
 
-  const date_index_in_current_year = (
-    current_date_range,
-    date_to_be_indexed
-  ) => {
-    const current_year_date = new Date(current_date_range);
-    const date_to_be_indexed_date = new Date(date_to_be_indexed);
-    const how_many_days_passed = Math.ceil(
-      (date_to_be_indexed_date - current_year_date) / 86400000
+  const dateIndexInCurrentYear = (currentDateRange, dateToBeIndexed) => {
+    const currentYearDate = new Date(currentDateRange);
+    const dateToBeIndexedDate = new Date(dateToBeIndexed);
+    const howManyDaysPassed = Math.ceil(
+      (dateToBeIndexedDate - currentYearDate) / 86400000
     );
-    return Number((how_many_days_passed / 365).toFixed(2));
+    return Number((howManyDaysPassed / 365).toFixed(2));
   };
 
-  const date_index_in_current_year_month = (
-    current_date_range,
-    date_to_be_indexed
-  ) => {
-    const current_year_date = new Date(current_date_range);
-    const date_to_be_indexed_date = new Date(date_to_be_indexed);
-    const how_many_days_passed = Math.ceil(
-      (date_to_be_indexed_date - current_year_date) / 86400000
-    );
+  const dateIndexInCurrentYearMonth = (currentDateRange, dateToBeIndexed) => {
+    const currentYearDate = new Date(currentDateRange);
+    const dateToBeIndexedDate = new Date(dateToBeIndexed);
 
-    const current_range_month = current_date_range
-      .split("")
-      .splice(5, 2)
-      .join("");
+    const howManyDaysPassed =
+      (dateToBeIndexedDate - currentYearDate) / 86400000;
 
-    const current_month_days = months.find(
-      (month) => month.numerical_expression === current_range_month
+    const currentRangeMonth = currentDateRange.split("").splice(5, 2).join("");
+
+    const currentMonthDays = months.find(
+      (month) => month.numerical_expression === currentRangeMonth
     ).days;
 
-    return Number((how_many_days_passed / current_month_days).toFixed(2));
+    return Number(howManyDaysPassed / currentMonthDays).toFixed(2);
   };
 
   useEffect(() => {
-    filter_and_setup_for_rendering(
-      list_of_group_items,
-      global_year,
-      global_month
-    );
+    filterAndSetupForRendering(listOfGroupItems, globalYear, globalMonth);
     // eslint-disable-next-line
-  }, [list_of_group_items, global_year, global_month]);
+  }, [listOfGroupItems, globalYear, globalMonth]);
 
   return (
     <>
       {listOfGroupItemsWithIndexes && (
         <div className="flex w-full">
-          <div className="flex items-center justify-center w-40 flex-shrink-0 bg-white shadow-r uppercase font-bold text-gray-600">
+          <div className="flex items-center justify-center text-center w-40 p-2 text-sm border-r border-gray-300 flex-shrink-0 bg-white shadow-r uppercase font-bold text-gray-600">
             {listOfGroupItemsWithIndexes[0] &&
               listOfGroupItemsWithIndexes[0].group}
           </div>
           <div className="w-full relative">
-            {listOfGroupItemsWithIndexes.map((group_item, i) => {
-              const item_start = group_item.start_index * 100;
-              const item_length = (
-                (group_item.end_index - group_item.start_index) *
+            <TodaysMarker zoomedToMonth={globalMonth} />
+
+            {listOfGroupItemsWithIndexes.map((groupItem, i) => {
+              const itemStart = (groupItem.start_index * 100).toFixed(0);
+              const itemLength = (
+                (groupItem.end_index - groupItem.start_index) *
                 100
               ).toFixed(0);
 
               return (
                 <Track
                   key={i}
-                  track_length_by_index={item_length}
-                  track_start_by_index={item_start}
-                  title={group_item.title}
-                  track_styling={group_item.styling ? group_item.styling : ""}
-                  details={group_item.details}
-                  date={`${group_item.start_date} - ${group_item.end_date}`}
+                  trackLengthByIndex={itemLength}
+                  trackStartByIndex={itemStart}
+                  title={groupItem.title}
+                  trackStyling={groupItem.styling ? groupItem.styling : ""}
+                  details={groupItem.details}
+                  date={`${groupItem.start_date} - ${groupItem.end_date}`}
                 />
               );
             })}
