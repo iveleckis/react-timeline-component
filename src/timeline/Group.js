@@ -136,7 +136,7 @@ const Group = ({ listOfGroupItems, globalYear, globalMonth, children }) => {
               listOfGroupItemsWithIndexes[0].group}
           </div>
           <div className="w-full relative">
-            <TodaysMarker zoomedToMonth={globalMonth} />
+            <TodaysMarker globalMonth={globalMonth} globalYear={globalYear} />
 
             {listOfGroupItemsWithIndexes.map((groupItem, i) => {
               const itemStart = (groupItem.start_index * 100).toFixed(0);
