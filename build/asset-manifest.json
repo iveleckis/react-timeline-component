@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-timeline-component/static/css/main.8c78502e.chunk.css",
-    "main.js": "/react-timeline-component/static/js/main.00506922.chunk.js",
-    "main.js.map": "/react-timeline-component/static/js/main.00506922.chunk.js.map",
+    "main.js": "/react-timeline-component/static/js/main.c536b5fa.chunk.js",
+    "main.js.map": "/react-timeline-component/static/js/main.c536b5fa.chunk.js.map",
     "runtime-main.js": "/react-timeline-component/static/js/runtime-main.b1cb2e75.js",
     "runtime-main.js.map": "/react-timeline-component/static/js/runtime-main.b1cb2e75.js.map",
     "static/js/2.524c8edf.chunk.js": "/react-timeline-component/static/js/2.524c8edf.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b1cb2e75.js",
     "static/js/2.524c8edf.chunk.js",
     "static/css/main.8c78502e.chunk.css",
-    "static/js/main.00506922.chunk.js"
+    "static/js/main.c536b5fa.chunk.js"
   ]
 }
